@@ -48,9 +48,36 @@
     cursor: pointer;
 }
 
-
 .landing__imgDiv {
     border: 2px black solid;
     grid-row: 3 / 4;
     grid-column: 2 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.books {
+    width: 20vw;
+    height: auto;
+}
+
+.lemons {
+    width: 27vw;
+    height: auto;
+}
+
+.record {
+    width: 28vw;
+    height: auto;
+}
+
+.glasses {
+    width: 20vw;
+    height: auto;
+}
+
+.boots {
+    width: 25vw;
+    height: auto;
 }

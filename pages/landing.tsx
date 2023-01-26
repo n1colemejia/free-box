@@ -1,13 +1,18 @@
 import styles from '@/styles/Landing.module.css';
+
 import lemons from '../public/images/lemons.jpeg';
+import record from '../public/images/record.jpeg';
+import glasses from '../public/images/glasses.jpeg';
+import books from '../public/images/books.jpeg';
+import boots from '../public/images/boots.jpeg';
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { Draggable } from 'drag-react';
 
+
 const Landing = () => {
-    // add images object list, map through and make each draggable & add attributes
-    // figure out how to fix each images positions in center of page
+    
 
     return (
         <div className={styles.landing}>
@@ -20,8 +25,12 @@ const Landing = () => {
             </div>
 
             <div className={styles.landing__imgDiv}>
-            {/* five images */}
-                <Draggable className={styles.draggable}><Image draggable='true' src={lemons} width='190' height='290' alt='lemons' /></Draggable>
+                <h2>Upcycle with friends!</h2>
+                <Draggable style={{position: 'absolute', left: '5rem', top: '6rem'}}><Image className={styles.lemons} src={lemons} alt='lemons'/></Draggable>
+                <Draggable style={{position: 'absolute', left: '20rem', top: '25rem'}}><Image className={styles.record} src={record} alt='record'/></Draggable>
+                <Draggable style={{position: 'absolute', left: '44rem', top: '15rem'}}><Image className={styles.glasses} src={glasses} alt='glasses'/></Draggable>
+                <Draggable style={{position: 'absolute', left: '30rem', top: '5rem'}}><Image className={styles.books} src={books} alt='books'/></Draggable>
+                <Draggable style={{position: 'absolute', left: '60rem', top: '8rem'}}><Image className={styles.boots} src={boots} alt='boots'/></Draggable>
             </div>
 
             <div className={styles.landing__aboutDiv}>
