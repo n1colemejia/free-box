@@ -1,11 +1,20 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
+import styles from '@/styles/Home.module.css';
+import Head from 'next/head';
+import Header from './components/Header';
+import SearchBar from './components/SearchBar';
+import SideMenu from './components/SideMenu';
+import Dashboard from './components/Dashboard';
+import ItemList from './components/ItemList';
 
-const inter = Inter({ subsets: ['latin'] })
+import { database } from 'firebaseConfig';
+import { collection } from 'firebase/firestore';
 
-export default function Home() {
+// initialize database collection
+const dbInstance = collection(database, 'users');
+
+const Home = () => {
+  // state
+
   return (
     <>
       <Head>
@@ -14,7 +23,15 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>Helllo</main>
+      <main>
+        <Header />
+        <SearchBar />
+        <SideMenu />
+        <Dashboard />
+        <ItemList />
+      </main>
     </>
   );
 }
+
+export default Home;
