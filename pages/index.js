@@ -4,11 +4,11 @@ import NavBar from '@/components/NavBar';
 import Dashboard from '@/components/Dashboard';
 import ItemFeed from '@/components/ItemFeed';
 
-import { useState, useRouter } from 'react';
+import { useState, useRouter, useEffect } from 'react';
 
 import { firestore, itemToJSON, fromMillis } from '@/lib/firebase';
 import { storage } from '../lib/firebase'; 
-import { ref, uploadBytes } from 'firebase/storage';
+import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 
 import { v4 } from 'uuid';
 
@@ -34,7 +34,10 @@ export default function HomePage({ allItems }) {
   const [items, setItems] = useState(allItems);
   const [loading, setLoading] = useState(false);
   const [itemsEnd, setItemsEnd] = useState(false);
+  const [openPopup, setOpenPopup] = useState(false);
   const [imageToUpload, setImageToUpload] = useState(null);
+  const [imageList, setImageList] = useState([]);
+  const [imageURL, setImageURL] = useState('');
 
   // get more items callback 
   const getMoreItems = async () => {
@@ -61,8 +64,8 @@ export default function HomePage({ allItems }) {
   };
 
   // post new item 
-  const postItem = async (e) => {
-    e.preventDefault();
+  const postItem = async (itemData) => {
+    // e.preventDefault();
     const uid = auth.currentUser.uid;
     const itemRef = firestore
       .collection('users')
@@ -70,18 +73,24 @@ export default function HomePage({ allItems }) {
       .collection('items')
       .doc(title);
 
-      const itemData = {
-        title, 
-        caption,
-        published,
+      const newItemData = {
+        title: itemData.title,
+        image: imageURL, 
+        caption: itemData.caption,
+        published: true,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       };
 
-      await itemRef.set(itemData);
+      await itemRef.set(newItemData);
   }
 
-  // input file event handler
+  // open post item pop up event handler
+  const handlePopup = () => {
+    setOpenPopup(!openPopup);
+  }
+
+  // input file change event handler
   const handleFileChange = (imageFile) => {
     setImageToUpload(imageFile);
   }
@@ -91,14 +100,34 @@ export default function HomePage({ allItems }) {
     if (imageToUpload == null) return;
     const imageRef = ref(storage, `images/${imageToUpload.name + v4()}`)
     uploadBytes(imageRef, imageToUpload)
-    .then(() => {
+    .then((snapshot) => {
       alert('Image Uploaded');
+      getDownloadURL(snapshot.ref).then((url) => {
+        setImageURL(url);
+        setImageList((prev) => [...prev, url]);
+      })
     })
   };
+
+  const imageListRef = ref(storage, 'images/');
+
+  useEffect(() => {
+    listAll(imageListRef)
+    .then((response) => {
+      response.items.forEach((item) => {
+        getDownloadURL(item)
+        .then((url) => {
+          setImageList((prev) => [...prev, url])
+        })
+      })
+    })
+  }, []);
 
   return (
     <main>
       <NavBar 
+        openPopup={openPopup}
+        handlePopup={handlePopup}
         postItemCallback={postItem}
         uploadImageCallback={uploadImage}
         handleFileChange={handleFileChange}

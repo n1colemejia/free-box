@@ -1,9 +1,9 @@
-import PostItemButton from '@/components/PostItemButton';
+import PostItemForm from '@/components/PostItemForm';
 import SearchBar from '@/components/SearchBar';
 import SideMenu from '@/components/SideMenu';
 import { Navbar, Text } from '@nextui-org/react';
 
-export default function NavBar({ postItemCallback, uploadImageCallback, handleFileChange }) {
+export default function NavBar({ openPopup, handlePopup, postItemCallback, uploadImageCallback, handleFileChange }) {
   return (
     <Navbar shouldHideOnScroll variant='sticky'>
       
@@ -14,7 +14,9 @@ export default function NavBar({ postItemCallback, uploadImageCallback, handleFi
       <Navbar.Content>
 
         <Navbar.Item>
-          <PostItemButton 
+          <PostItemForm 
+            openPopup={openPopup}
+            handlePopup={handlePopup}
             postItemCallback={postItemCallback}
             uploadImageCallback={uploadImageCallback}
             handleFileChange={handleFileChange}
