@@ -1,8 +1,8 @@
 import LoginControls from "./LoginControls";
 import Link from "next/link";
-import { Dropdown } from '@nextui-org/react';
+import { Button, Dropdown } from '@nextui-org/react';
 
-export default function SideMenu() {
+export default function SideMenu({ handleLogOut }) {
   return (
     <Dropdown>
       <Dropdown.Button flat>Menu</Dropdown.Button>
@@ -17,7 +17,7 @@ export default function SideMenu() {
           </Dropdown.Item>
           
           <Dropdown.Item key="logOut" withDivider color="default">
-              <LoginControls isLoggedIn={true} />
+              <Button onPress={handleLogOut}>Log out</Button>
           </Dropdown.Item>
 
       </Dropdown.Menu>

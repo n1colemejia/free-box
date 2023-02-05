@@ -4,11 +4,13 @@ import NavBar from '@/components/NavBar';
 import Dashboard from '@/components/Dashboard';
 import ItemFeed from '@/components/ItemFeed';
 
-import { useState, useRouter, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { useRouter } from 'next/router';
 
-import { firestore, itemToJSON, fromMillis } from '@/lib/firebase';
+import { auth, googleAuthProvider, firestore, itemToJSON, fromMillis } from '@/lib/firebase';
 import { storage } from '../lib/firebase'; 
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
+import { UserContext } from '@/lib/context';
 
 import { v4 } from 'uuid';
 
@@ -38,6 +40,23 @@ export default function HomePage({ allItems }) {
   const [imageToUpload, setImageToUpload] = useState(null);
   const [imageList, setImageList] = useState([]);
   const [imageURL, setImageURL] = useState('');
+
+  // context 
+  const { user, username } = useContext(UserContext);
+
+  // router 
+  const router = useRouter();
+
+  // handle user log in 
+  const handleLogInWithGoogle = async () => {
+    await auth.signInWithPopup(googleAuthProvider);
+  };
+
+  // handle user log out 
+  const handleLogOut = () => {
+    auth.signOut();
+    router.reload();
+  };
 
   // get more items callback 
   const getMoreItems = async () => {
@@ -126,6 +145,8 @@ export default function HomePage({ allItems }) {
   return (
     <main>
       <NavBar 
+        handleLogInWithGoogle={handleLogInWithGoogle}
+        handleLogOut={handleLogOut}
         openPopup={openPopup}
         handlePopup={handlePopup}
         postItemCallback={postItem}

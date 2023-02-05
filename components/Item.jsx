@@ -7,7 +7,7 @@ export default function Item({ item }) {
     <Card>
       <Text h3>{item.title}</Text>
       <Image 
-        src={item.photoURL}
+        src={chair}
         alt={`${item.title}`}
         width={300}
         height={300}
