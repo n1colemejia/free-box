@@ -4,7 +4,13 @@ import SideMenu from '@/components/SideMenu';
 import { Navbar, Text, Button } from '@nextui-org/react';
 import Link from 'next/link';
 
+import { useContext } from 'react';
+
+import { UserContext } from '@/lib/context';
+
 export default function NavBar({ handleLogInWithGoogle, handleLogOut, openPopup, handlePopup, postItemCallback, uploadImageCallback, handleFileChange }) {
+  // context 
+  const { user, username } = useContext(UserContext);
 
   return user ? ( 
     <Navbar shouldHideOnScroll variant='sticky'>

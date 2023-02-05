@@ -49,7 +49,11 @@ export default function HomePage({ allItems }) {
 
   // handle user log in 
   const handleLogInWithGoogle = async () => {
-    await auth.signInWithPopup(googleAuthProvider);
+    await auth.signInWithPopup(googleAuthProvider)
+    // .then(() => {
+    // navigate to home page
+    // router.push('/');
+    // });
   };
 
   // handle user log out 

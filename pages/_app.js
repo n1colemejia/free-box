@@ -7,7 +7,6 @@ import { UserContext } from '@/lib/context';
 
 
 export default function App({ Component, pageProps }) {
-  
 
   return (
     <UserContext.Provider value={{user: 'Nicole', username: 'nicolemejia'}}>
