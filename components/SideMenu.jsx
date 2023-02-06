@@ -1,4 +1,3 @@
-import LoginControls from "./LoginControls";
 import Link from "next/link";
 import { Button, Dropdown } from '@nextui-org/react';
 

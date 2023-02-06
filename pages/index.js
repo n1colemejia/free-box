@@ -7,7 +7,7 @@ import ItemFeed from '@/components/ItemFeed';
 import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 
-import { auth, googleAuthProvider, firestore, itemToJSON, fromMillis } from '@/lib/firebase';
+import { auth, firestore, itemToJSON, fromMillis, serverTimestamp } from '@/lib/firebase';
 import { storage } from '../lib/firebase'; 
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 import { UserContext } from '@/lib/context';
@@ -47,19 +47,10 @@ export default function HomePage({ allItems }) {
   // router 
   const router = useRouter();
 
-  // handle user log in 
-  const handleLogInWithGoogle = async () => {
-    await auth.signInWithPopup(googleAuthProvider)
-    // .then(() => {
-    // navigate to home page
-    // router.push('/');
-    // });
-  };
-
   // handle user log out 
   const handleLogOut = () => {
     auth.signOut();
-    router.reload();
+    router.push('/login');
   };
 
   // get more items callback 
@@ -94,7 +85,7 @@ export default function HomePage({ allItems }) {
       .collection('users')
       .doc(uid)
       .collection('items')
-      .doc(title);
+      .doc(itemData.title);
 
       const newItemData = {
         title: itemData.title,
@@ -127,29 +118,29 @@ export default function HomePage({ allItems }) {
       alert('Image Uploaded');
       getDownloadURL(snapshot.ref).then((url) => {
         setImageURL(url);
+        console.log(`imageURL: ${imageURL}`);
         setImageList((prev) => [...prev, url]);
       })
     })
   };
 
-  const imageListRef = ref(storage, 'images/');
+  // const imageListRef = ref(storage, 'images/');
 
-  useEffect(() => {
-    listAll(imageListRef)
-    .then((response) => {
-      response.items.forEach((item) => {
-        getDownloadURL(item)
-        .then((url) => {
-          setImageList((prev) => [...prev, url])
-        })
-      })
-    })
-  }, []);
+  // useEffect(() => {
+  //   listAll(imageListRef)
+  //   .then((response) => {
+  //     response.items.forEach((item) => {
+  //       getDownloadURL(item)
+  //       .then((url) => {
+  //         setImageList((prev) => [...prev, url])
+  //       })
+  //     })
+  //   })
+  // }, []);
 
   return (
     <main>
       <NavBar 
-        handleLogInWithGoogle={handleLogInWithGoogle}
         handleLogOut={handleLogOut}
         openPopup={openPopup}
         handlePopup={handlePopup}

@@ -1,15 +1,13 @@
 import '@/styles/globals.css'
 import { NextUIProvider } from '@nextui-org/react';
-import { auth, firestore } from '../lib/firebase';
-import { useState, useEffect } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { UserContext } from '@/lib/context';
-
+import { useUserData } from '@/lib/hooks';
 
 export default function App({ Component, pageProps }) {
+  const userData = useUserData();
 
   return (
-    <UserContext.Provider value={{user: 'Nicole', username: 'nicolemejia'}}>
+    <UserContext.Provider value={userData}>
       <NextUIProvider>
         <Component {...pageProps} />
       </NextUIProvider>
