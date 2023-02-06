@@ -11,16 +11,17 @@ export default function PostItemForm({ openPopup, handlePopup, postItemCallback,
   });
 
   const submitNewItem = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     postItemCallback(itemData);
     setNewItemData({
-      title: '',
-      caption: '', 
-    });
+        title: '',
+        caption: '', 
+      });
   }
 
   const handleChange = (event) => {
     setNewItemData({...itemData, [event.target.name]: event.target.value});
+
   };
 
 

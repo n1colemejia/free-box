@@ -87,6 +87,8 @@ export default function HomePage({ allItems }) {
       .collection('items')
       .doc(itemData.title);
 
+      // uploadImage();
+
       const newItemData = {
         title: itemData.title,
         image: imageURL, 
@@ -97,6 +99,7 @@ export default function HomePage({ allItems }) {
       };
 
       await itemRef.set(newItemData);
+      router.reload();
   }
 
   // open post item pop up event handler
@@ -106,7 +109,7 @@ export default function HomePage({ allItems }) {
 
   // input file change event handler
   const handleFileChange = (imageFile) => {
-    setImageToUpload(imageFile);
+    setImageToUpload(imageFile)
   }
 
   // upload image callback passed to PostItemButton
