@@ -90,6 +90,10 @@ export default function HomePage({ allItems }) {
       // uploadImage();
 
       const newItemData = {
+        user: {
+          displayName: user.displayName,
+          username: username,
+        },
         title: itemData.title,
         image: imageURL, 
         caption: itemData.caption,
@@ -152,7 +156,7 @@ export default function HomePage({ allItems }) {
         handleFileChange={handleFileChange}
         />
       <Dashboard />
-      <ItemFeed items={items} loading={loading} itemsEnd={itemsEnd} getMoreItemsCallback={getMoreItems} />
+      <ItemFeed items={items} loading={loading} itemsEnd={itemsEnd} getMoreItemsCallback={getMoreItems} home />
     </main>
   );
 }

@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { Button, Dropdown } from '@nextui-org/react';
 
-export default function SideMenu({ handleLogOut }) {
+export default function SideMenu({ username, handleLogOut }) {
   return (
     <Dropdown>
       <Dropdown.Button flat>Menu</Dropdown.Button>
       <Dropdown.Menu aria-label="Static Actions">
           
           <Dropdown.Item key='profile'>
-            <Link href={`/`}>Go to profile</Link>
+            <Link href={`/${username}`}>Go to profile</Link>
           </Dropdown.Item>
           
           <Dropdown.Item key="home">

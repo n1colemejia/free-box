@@ -37,7 +37,9 @@ export default function NavBar({ handleLogInWithGoogle, handleLogOut, openPopup,
           </Navbar.Item>
 
         <Navbar.Item>
-          <SideMenu handleLogOut={handleLogOut} />
+          <SideMenu 
+            username={username}
+            handleLogOut={handleLogOut} />
         </Navbar.Item>
 
       </Navbar.Content>
