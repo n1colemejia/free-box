@@ -1,7 +1,7 @@
 import Item from '@/components/Item';
 import { Container, Button} from "@nextui-org/react";
 
-export default function ItemFeed({ items, loading, itemsEnd, getMoreItemsCallback, home, openEditItem, handleOpenEditItem, editItemCallback }) {
+export default function ItemFeed({ items, loading, itemsEnd, getMoreItemsCallback, home, openEditItem, handleOpenEditItem, editItemCallback, deleteItemCallback }) {
   
   const itemsFeed = items ? items.map(
     (item) => 
@@ -11,8 +11,9 @@ export default function ItemFeed({ items, loading, itemsEnd, getMoreItemsCallbac
       openEditItem={openEditItem}
       handleOpenEditItem={handleOpenEditItem}
       editItemCallback={editItemCallback}
+      deleteItemCallback={deleteItemCallback}
       />
-    ) : null;
+    ) : <>No Items Found</>;
   
   return (
     <Container>

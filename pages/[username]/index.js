@@ -36,7 +36,7 @@ export default function ProfilePage({ user, userItems }) {
 
   return (
     <main>
-      <UserProfile user={user} handlePopup={handlePopup} />
+      <UserProfile user={user} />
       <ItemFeed items={userItems} />
     </main>
   );

@@ -2,10 +2,10 @@ import AdminButtons from './AdminButtons';
 import { Card, Text } from '@nextui-org/react';
 import Image from 'next/image';
 
-export default function Item({ item, openEditItem, handleOpenEditItem, editItemCallback }) {
+export default function Item({ item, openEditItem, handleOpenEditItem, editItemCallback, deleteItemCallback }) {
   // if admin, show admin buttons
 
-  return (
+  return 
     <Card>
       <Text h2>{item.user.displayName}</Text>
       <Text h2>@{item.user.username}</Text>
@@ -22,7 +22,7 @@ export default function Item({ item, openEditItem, handleOpenEditItem, editItemC
           handleOpenEditItem={handleOpenEditItem}
           editItemCallback={editItemCallback}
           itemTitle={item.title}
+          deleteItemCallback={deleteItemCallback}
           />
     </Card>
-  );
 }

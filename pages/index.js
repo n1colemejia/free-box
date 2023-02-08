@@ -148,8 +148,6 @@ export default function HomePage({ allItems }) {
 
   // edit item 
   const editItem = async (itemData) => {
-    console.log('inside edit item')
-    // e.preventDefault();
     const uid = auth.currentUser.uid;
     const itemRef = firestore
       .collection('users')
@@ -170,6 +168,23 @@ export default function HomePage({ allItems }) {
   const handleOpenEditItem = () => {
     setOpenEditItem(!openEditItem);
   }
+  
+  // delete item
+  const deleteItem = async (itemTitle) => {
+    const uid = auth.currentUser.uid;
+    const itemRef = firestore
+      .collection('users')
+      .doc(uid)
+      .collection('items')
+      .doc(itemTitle);
+
+    const confirmDelete = confirm('are you sure?');
+
+    if (confirmDelete) {
+      await itemRef.delete();
+      router.reload();
+    };
+  };
 
 
   return (
@@ -191,6 +206,7 @@ export default function HomePage({ allItems }) {
         openEditItem={openEditItem}
         handleOpenEditItem={handleOpenEditItem}
         editItemCallback={editItem}
+        deleteItemCallback={deleteItem}
         />
     </main>
   );
