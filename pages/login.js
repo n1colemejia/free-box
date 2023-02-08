@@ -8,15 +8,24 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { UserContext } from '@/lib/context';
 
-import { auth, firestore, googleAuthProvider } from 'lib/firebase';
+import { auth, firestore, googleAuthProvider, storage } from 'lib/firebase';
+import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 import debounce from 'lodash.debounce';
+import { v4 } from 'uuid';
 
 export default function LoginPage(props) {
   // state
   const [openPopup, setOpenPopup] = useState(false);
-  const [formValue, setFormValue] = useState('');
+  const [formValues, setFormValues] = useState({
+    name: '',
+    username: '',
+    bio: '',
+    profilePic: '',
+  });
   const [isValid, setIsValid] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [imageToUpload, setImageToUpload] = useState(null);
+  const [imageURL, setImageURL] = useState('');
 
   // router 
   const router = useRouter();
@@ -24,54 +33,59 @@ export default function LoginPage(props) {
   // context
   const { user, username } = useContext(UserContext);
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // reference user & username docs
     const userRef = firestore.doc(`users/${user.uid}`);
-    const usernameRef = firestore.doc(`usernames/${formValue}`);
+    const usernameRef = firestore.doc(`usernames/${formValues.username}`);
 
     // commit both together as batch write
     const batch = firestore.batch();
-    batch.set(userRef, { username: formValue, photoURL: user.photoURL, displayName: user.displayName });
+    batch.set(userRef, {
+      name: formValues.name, 
+      username: formValues.username, 
+      bio: formValues.bio,
+      profilePic: imageURL,
+    });
     batch.set(usernameRef, { uid: user.uid });
 
     await batch.commit();
   };
   
-  // check formValue is in correct format
-  const onChange = (e) => {
+  // check username is in correct format
+  const handleUsernameChange = (e) => {
     const val = e.target.value.toLowerCase();
     const re = /^(?=[a-zA-Z0-9._]{3,15}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
 
     if (val.length < 3) {
-      setFormValue(val);
+      setFormValues(val);
       setLoading(false);
       setIsValid(false);
     }
 
     if (re.test(val)) {
-      setFormValue(val);
+      setFormValues(val);
       setLoading(true);
       setIsValid(false);
     }
-
+    // maybe add username message here?
   };
 
   // handle user log in 
   const handleLogInWithGoogle = async () => {
     await auth.signInWithPopup(googleAuthProvider)
     .then(() => {
-      username ? setOpenPopup(false) : setOpenPopup(true);
+      !username ? setOpenPopup(true) : setOpenPopup(false);
     })
     .then(() => {
-      router.push('/');
+      // router.push('/');
     })
   }
 
   useEffect(() => {
-    checkUsername(formValue);
-  }, [formValue]);
+    checkUsername(formValues.username);
+  }, [formValues.username]);
 
   // check firestore for username match/availability
   // debounce waits until user stops typing
@@ -99,12 +113,38 @@ export default function LoginPage(props) {
     if (loading) {
       return `Hmm...lets see...`;
     } else if (isValid) {
-      return `How unique. ${formValue} is all yours.`;
-    } else if (formValue && !isValid) {
+      return `How unique. ${formValues.username} is all yours.`;
+    } else if (formValues.username && !isValid) {
       return 'SHES TAKEN TRY AGAIN';
     } else {
       return '';
     }
+  };
+
+  // set all form values
+  const handleChange = (event) => {
+    handleUsernameChange(event);
+    setFormValues({...formValues, [event.target.name]: event.target.value});
+  };
+
+  // input file change event handler
+  const handleFileChange = (imageFile) => {
+    setImageToUpload(imageFile)
+  }
+
+  // upload image
+  const uploadImage = () => {
+    if (imageToUpload == null) return;
+    const imageRef = ref(storage, `profile-pic/${formValues.username + v4()}`)
+    uploadBytes(imageRef, imageToUpload)
+    .then((snapshot) => {
+      alert('Image Uploaded');
+      getDownloadURL(snapshot.ref)
+      .then((url) => {
+        setImageURL(url);
+        console.log(`imageURL: ${imageURL}`);
+      })
+    })
   };
 
   return (
@@ -116,15 +156,35 @@ export default function LoginPage(props) {
         open={openPopup}
         closeOnDocumentClick onClose={() => handlePopup()}
         >
-          <form onSubmit={onSubmit}>
-            <input 
+          <form onSubmit={handleSubmit}>
+            <Input 
+              name='name'
+              placeholder='name'
+              value={formValues.name}
+              onChange={handleChange}
+              required
+            />
+            <Input 
               name='username'
               placeholder='username'
-              value={formValue}
-              onChange={onChange}
+              value={formValues.username}
+              onChange={handleChange}
             />
             <br />
             {usernameMessage()}
+            <br />
+            <Input 
+              name='bio'
+              placeholder='bio'
+              value={formValues.bio}
+              onChange={handleChange}
+            />
+            <br />
+            <Input
+              type='file'
+              onChange={(event) => handleFileChange(event.target.files[0])}
+            />
+            <Button onPress={uploadImage}>Upload Image</Button>
             <Button type='submit' disabled={!isValid}>I want it!</Button>
           </form>
       </Popup>

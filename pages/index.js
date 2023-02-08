@@ -178,7 +178,7 @@ export default function HomePage({ allItems }) {
       .collection('items')
       .doc(itemTitle);
 
-    const confirmDelete = confirm('are you sure?');
+    const confirmDelete = confirm('are you sure about this?');
 
     if (confirmDelete) {
       await itemRef.delete();

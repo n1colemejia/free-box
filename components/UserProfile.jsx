@@ -1,5 +1,5 @@
 import { Container, Col, Card, Text } from '@nextui-org/react';
-// import Image from 'next/image';
+import Image from 'next/image';
 
 export default function UserProfile({ user }) {
 
@@ -8,10 +8,12 @@ export default function UserProfile({ user }) {
         <Card>
           <Card.Body>
             <Col justify='center' align='flex-start'>
-              {/* <Image
-                src={}
-                alt={`photo of ${user.displayName}`}
-              /> */}
+              <Image
+                src={user.profilePic}
+                alt={`photo of ${user.name}`}
+                width={100}
+                height={150}
+              />
               <div>
                 Profile picture here
               </div>
