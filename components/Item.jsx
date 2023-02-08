@@ -1,9 +1,10 @@
+import AdminButtons from './AdminButtons';
 import { Card, Text } from '@nextui-org/react';
 import Image from 'next/image';
-import chair from 'public/images/arm-chair.jpeg';
 
-export default function Item({ item }) {
-  console.log(item)
+export default function Item({ item, openEditItem, handleOpenEditItem, editItemCallback }) {
+  // if admin, show admin buttons
+
   return (
     <Card>
       <Text h2>{item.user.displayName}</Text>
@@ -16,6 +17,12 @@ export default function Item({ item }) {
         height={300}
         />
         <Text>{item.caption}</Text>
+        <AdminButtons 
+          openEditItem={openEditItem}
+          handleOpenEditItem={handleOpenEditItem}
+          editItemCallback={editItemCallback}
+          itemTitle={item.title}
+          />
     </Card>
   );
 }

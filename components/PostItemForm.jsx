@@ -4,7 +4,7 @@ import Popup from 'reactjs-popup';
 
 import { useState } from 'react';
 
-export default function PostItemForm({ openPopup, handlePopup, postItemCallback, uploadImageCallback, handleFileChange }) {
+export default function PostItemForm({ openPostItem, handlePostItem, postItemCallback, uploadImageCallback, handleFileChange }) {
   const [itemData, setNewItemData] = useState({
     title: '',
     caption: '', 
@@ -24,13 +24,12 @@ export default function PostItemForm({ openPopup, handlePopup, postItemCallback,
 
   };
 
-
   return (
     <div>
-      <Button onPress={handlePopup}>Post Item</Button>
+      <Button onPress={handlePostItem}>Post Item</Button>
       <Popup 
-        open={openPopup}
-        closeOnDocumentClick onClose={() => handlePopup()}
+        open={openPostItem}
+        closeOnDocumentClick onClose={() => handlePostItem()}
         >
         <form onSubmit={submitNewItem}>
             <Input 

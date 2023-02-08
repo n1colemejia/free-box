@@ -8,7 +8,7 @@ import { useContext } from 'react';
 
 import { UserContext } from '@/lib/context';
 
-export default function NavBar({ handleLogInWithGoogle, handleLogOut, openPopup, handlePopup, postItemCallback, uploadImageCallback, handleFileChange }) {
+export default function NavBar({ handleLogInWithGoogle, handleLogOut, openPostItem, handlePostItem, postItemCallback, uploadImageCallback, handleFileChange }) {
   // context 
   const { user, username } = useContext(UserContext);
 
@@ -24,8 +24,8 @@ export default function NavBar({ handleLogInWithGoogle, handleLogOut, openPopup,
 
         <Navbar.Item>
           <PostItemForm 
-            openPopup={openPopup}
-            handlePopup={handlePopup}
+            openPostItem={openPostItem}
+            handlePostItem={handlePostItem}
             postItemCallback={postItemCallback}
             uploadImageCallback={uploadImageCallback}
             handleFileChange={handleFileChange}

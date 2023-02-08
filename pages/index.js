@@ -36,10 +36,11 @@ export default function HomePage({ allItems }) {
   const [items, setItems] = useState(allItems);
   const [loading, setLoading] = useState(false);
   const [itemsEnd, setItemsEnd] = useState(false);
-  const [openPopup, setOpenPopup] = useState(false);
+  const [openPostItem, setOpenPostItem] = useState(false);
   const [imageToUpload, setImageToUpload] = useState(null);
   const [imageList, setImageList] = useState([]);
   const [imageURL, setImageURL] = useState('');
+  const [openEditItem, setOpenEditItem] = useState(false);
 
   // context 
   const { user, username } = useContext(UserContext);
@@ -107,8 +108,8 @@ export default function HomePage({ allItems }) {
   }
 
   // open post item pop up event handler
-  const handlePopup = () => {
-    setOpenPopup(!openPopup);
+  const handlePostItem = () => {
+    setOpenPostItem(!openPostItem);
   }
 
   // input file change event handler
@@ -145,18 +146,52 @@ export default function HomePage({ allItems }) {
   //   })
   // }, []);
 
+  // edit item 
+  const editItem = async (itemData) => {
+    console.log('inside edit item')
+    // e.preventDefault();
+    const uid = auth.currentUser.uid;
+    const itemRef = firestore
+      .collection('users')
+      .doc(uid)
+      .collection('items')
+      .doc(itemData.title);
+
+      const updatedItemData = {
+        caption: itemData.caption,
+        updatedAt: serverTimestamp(),
+      };
+
+      await itemRef.update(updatedItemData);
+      router.reload();
+  };
+
+  // open post item pop up event handler
+  const handleOpenEditItem = () => {
+    setOpenEditItem(!openEditItem);
+  }
+
+
   return (
     <main>
       <NavBar 
         handleLogOut={handleLogOut}
-        openPopup={openPopup}
-        handlePopup={handlePopup}
+        openPostItem={openPostItem}
+        handlePostItem={handlePostItem}
         postItemCallback={postItem}
         uploadImageCallback={uploadImage}
         handleFileChange={handleFileChange}
         />
       <Dashboard />
-      <ItemFeed items={items} loading={loading} itemsEnd={itemsEnd} getMoreItemsCallback={getMoreItems} home />
+      <ItemFeed items={items}
+        loading={loading}
+        itemsEnd={itemsEnd}
+        getMoreItemsCallback={getMoreItems}
+        home
+        openEditItem={openEditItem}
+        handleOpenEditItem={handleOpenEditItem}
+        editItemCallback={editItem}
+        />
     </main>
   );
 }
