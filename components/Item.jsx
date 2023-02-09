@@ -1,13 +1,22 @@
+import AuthCheck from './AuthCheck';
 import AdminButtons from './AdminButtons';
+import DibsButton from './DibsButton';
 import { Card, Text } from '@nextui-org/react';
 import Image from 'next/image';
 
-export default function Item({ item, openEditItem, handleOpenEditItem, editItemCallback, deleteItemCallback }) {
-  // if admin, show admin buttons
+export default function Item({ 
+  item, 
+  openEditItem, 
+  handleOpenEditItem, 
+  editItemCallback, 
+  deleteItemCallback,
+  addDibsCallback,
+  removeDibsCallback
+}) {
 
-  return
+  return (
     <Card>
-      <Text h2>{item.user.displayName}</Text>
+      <Text h2>{item.user.name}</Text>
       <Text h2>@{item.user.username}</Text>
       <Text h3>{item.title}</Text>
       <Image 
@@ -24,5 +33,13 @@ export default function Item({ item, openEditItem, handleOpenEditItem, editItemC
           itemTitle={item.title}
           deleteItemCallback={deleteItemCallback}
           />
+          <AuthCheck>
+            <DibsButton 
+              itemTitle={item.title}
+              addDibsCallback={addDibsCallback}
+              removeDibsCallback={removeDibsCallback}
+            />
+          </AuthCheck>
     </Card>
+  );
 }

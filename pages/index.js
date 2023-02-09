@@ -4,7 +4,7 @@ import NavBar from '@/components/NavBar';
 import Dashboard from '@/components/Dashboard';
 import ItemFeed from '@/components/ItemFeed';
 
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 
 import { auth, firestore, itemToJSON, fromMillis, serverTimestamp } from '@/lib/firebase';
@@ -13,6 +13,7 @@ import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 import { UserContext } from '@/lib/context';
 
 import { v4 } from 'uuid';
+import { increment } from 'firebase/firestore';
 
 // global variable for max item to query
 const LIMIT = 1;
@@ -24,6 +25,7 @@ export async function getServerSideProps(context) {
     .where('published', '==', true)
     .orderBy('createdAt', 'desc')
     .limit(LIMIT);
+
   const allItems = (await allItemsQuery.get()).docs.map(itemToJSON);
   
   return {
@@ -54,20 +56,28 @@ export default function HomePage({ allItems }) {
     router.push('/login');
   };
 
+  // get item reference helper 
+  const getItemRef = (itemTitle) => {
+    const uid = auth.currentUser.uid;
+    const itemRef = firestore
+      .collection('users')
+      .doc(uid)
+      .collection('items')
+      .doc(itemTitle);
+    return itemRef;
+  };
+  
   // get more items callback 
   const getMoreItems = async () => {
     setLoading(true);
     const last = items[items.length - 1];
-    
     const cursor = typeof last.createdAt === 'number' ? fromMillis(last.createdAt) : last.createdAt;
-    
     const query = firestore
       .collectionGroup('items')
       .where('published', '==', true)
       .orderBy('createdAt', 'desc')
       .startAfter(cursor)
       .limit(LIMIT);
-
     const newItems = (await query.get()).docs.map((doc) => doc.data());
 
     setItems(items.concat(newItems));
@@ -80,31 +90,21 @@ export default function HomePage({ allItems }) {
 
   // post new item 
   const postItem = async (itemData) => {
-    // e.preventDefault();
-    const uid = auth.currentUser.uid;
-    const itemRef = firestore
-      .collection('users')
-      .doc(uid)
-      .collection('items')
-      .doc(itemData.title);
-
-      // uploadImage();
-
-      const newItemData = {
-        user: {
-          displayName: user.displayName,
-          username: username,
-        },
-        title: itemData.title,
-        image: imageURL, 
-        caption: itemData.caption,
-        published: true,
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
-      };
-
-      await itemRef.set(newItemData);
-      router.reload();
+    const itemRef = getItemRef(itemData.title);
+    const newItemData = {
+      user: {
+        name: user.displayName,
+        username: username,
+      },
+      title: itemData.title,
+      image: imageURL, 
+      caption: itemData.caption,
+      published: true,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    };
+    await itemRef.set(newItemData);
+    router.reload();
   }
 
   // open post item pop up event handler
@@ -148,18 +148,11 @@ export default function HomePage({ allItems }) {
 
   // edit item 
   const editItem = async (itemData) => {
-    const uid = auth.currentUser.uid;
-    const itemRef = firestore
-      .collection('users')
-      .doc(uid)
-      .collection('items')
-      .doc(itemData.title);
-
-      const updatedItemData = {
-        caption: itemData.caption,
-        updatedAt: serverTimestamp(),
-      };
-
+    const itemRef = getItemRef(itemData.title);
+    const updatedItemData = {
+      caption: itemData.caption,
+      updatedAt: serverTimestamp(),
+    };
       await itemRef.update(updatedItemData);
       router.reload();
   };
@@ -171,21 +164,32 @@ export default function HomePage({ allItems }) {
   
   // delete item
   const deleteItem = async (itemTitle) => {
-    const uid = auth.currentUser.uid;
-    const itemRef = firestore
-      .collection('users')
-      .doc(uid)
-      .collection('items')
-      .doc(itemTitle);
-
+    const itemRef = getItemRef(itemTitle);
     const confirmDelete = confirm('are you sure about this?');
-
     if (confirmDelete) {
       await itemRef.delete();
       router.reload();
     };
   };
 
+  // add dibs to item
+  const addDibs = async (itemTitle, dibsRef) => {
+    const batch = firestore.batch();
+    const uid = auth.currentUser.uid;
+    const itemRef = getItemRef(itemTitle);
+    batch.update(itemRef, { dibsCount: increment(1) });
+    batch.set(dibsRef, { uid });
+    await batch.commit();
+  };
+
+  // remove dibs from item
+  const removeDibs = async (itemTitle, dibsRef) => {
+    const batch = firestore.batch();
+    const itemRef = getItemRef(itemTitle);
+    batch.update(itemRef, { dibsCount: increment(-1) });
+    batch.delete(dibsRef);
+    await batch.commit();
+  };
 
   return (
     <main>
@@ -198,7 +202,8 @@ export default function HomePage({ allItems }) {
         handleFileChange={handleFileChange}
         />
       <Dashboard />
-      <ItemFeed items={items}
+      <ItemFeed 
+        items={items}
         loading={loading}
         itemsEnd={itemsEnd}
         getMoreItemsCallback={getMoreItems}
@@ -207,6 +212,8 @@ export default function HomePage({ allItems }) {
         handleOpenEditItem={handleOpenEditItem}
         editItemCallback={editItem}
         deleteItemCallback={deleteItem}
+        addDibsCallback={addDibs}
+        removeDibsCallback={removeDibs}
         />
     </main>
   );
