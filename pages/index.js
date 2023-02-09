@@ -14,26 +14,38 @@ import { UserContext } from '@/lib/context';
 
 import { v4 } from 'uuid';
 import { increment } from 'firebase/firestore';
+// import FriendList from '@/components/FriendList';
 
 // global variable for max item to query
 const LIMIT = 1;
 
 // get request for all users' items with SSR
 export async function getServerSideProps(context) {
-  const allItemsQuery = firestore
-    .collectionGroup('items')
-    .where('published', '==', true)
-    .orderBy('createdAt', 'desc')
-    .limit(LIMIT);
-
-  const allItems = (await allItemsQuery.get()).docs.map(itemToJSON);
   
+  const allItemsQuery = firestore
+  .collectionGroup('items')
+  .where('published', '==', true)
+  .orderBy('createdAt', 'desc')
+  .limit(LIMIT);
+  
+  const allItems = (await allItemsQuery.get()).docs.map(itemToJSON);
+
+  // const uid = auth.currentUser.uid;
+  // const allFriendsQuery = firestore
+  //   .collection('users')
+  //   .doc(uid)
+  //   .collection('friends');
+
+  // const allFriends = (await allFriendsQuery.get()).doc.map((doc) => {
+  //   doc.data();
+  // });
+
   return {
-    props: { allItems }, // passed to HomePage as props
+    props: { allItems, } //allFriends }, // passed to HomePage as props
   };
 }
 
-export default function HomePage({ allItems }) {
+export default function HomePage({ allItems, allFriends }) {
   // state 
   const [items, setItems] = useState(allItems);
   const [loading, setLoading] = useState(false);
@@ -43,6 +55,7 @@ export default function HomePage({ allItems }) {
   const [imageList, setImageList] = useState([]);
   const [imageURL, setImageURL] = useState('');
   const [openEditItem, setOpenEditItem] = useState(false);
+  // const [friends, setFriends] = useState(allFriends);
 
   // context 
   const { user, username } = useContext(UserContext);
@@ -202,6 +215,7 @@ export default function HomePage({ allItems }) {
         handleFileChange={handleFileChange}
         />
       <Dashboard />
+      {/* <FriendList friends={friends} /> */}
       <ItemFeed 
         items={items}
         loading={loading}
