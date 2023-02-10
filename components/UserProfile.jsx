@@ -25,7 +25,8 @@ export default function UserProfile({ user, addFriendCallback, removeFriendCallb
                 <Text h3>{user.bio}</Text>
             </Col>
             <Col justify='center' align='flex-start'>
-              <AddFriendButton 
+              <AddFriendButton
+                friend={user.username}
                 addFriendCallback={addFriendCallback}
                 removeFriendCallback={removeFriendCallback}
               />
