@@ -4,8 +4,7 @@ import ItemFeed from '@/components/ItemFeed';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { auth, firestore, getUserWithUsername, itemToJSON, fromMillis, serverTimestamp, increment } from '@/lib/firebase';
-import { storage } from '../lib/firebase'; 
+import { auth, firestore, getUserWithUsername, itemToJSON, fromMillis, serverTimestamp, increment, storage } from '@/lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 import { v4 } from 'uuid';
@@ -38,6 +37,18 @@ export async function getServerSideProps({ query }) {
 
   userItems = (await itemsQuery.get()).docs.map(itemToJSON);
 
+  // let axllUsers = null;
+
+  // const uid = auth.currentUser.uid;
+  // const allFriendsQuery = firestore
+  //   .collection('users')
+  //   .doc(uid)
+  //   .collection('friends');
+
+  // const allFriends = (await allFriendsQuery.get()).doc.map((doc) => {
+  //   doc.data();
+  // });
+
   return {
     props: { user, userItems }, // pass to page
   };
@@ -45,7 +56,7 @@ export async function getServerSideProps({ query }) {
 
 export default function ProfilePage({ user, userItems }) {
   // state 
-  const [items, setItems] = useState(allItems);
+  const [items, setItems] = useState(userItems);
   const [loading, setLoading] = useState(false);
   const [itemsEnd, setItemsEnd] = useState(false);
   const [openPostItem, setOpenPostItem] = useState(false);
@@ -205,7 +216,7 @@ export default function ProfilePage({ user, userItems }) {
     const userRef = firestore.collection('users').doc(uid);
     const batch = firestore.batch();
     batch.update(userRef, { friendCount: increment(1) });
-    batch.set(friendRef, { uid });
+    batch.set(friendRef, { name: user.name, profilePic: user.profilePic });
     await batch.commit();
   };
 

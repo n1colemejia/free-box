@@ -79,7 +79,7 @@ export default function LoginPage(props) {
       !username ? setOpenPopup(true) : setOpenPopup(false);
     })
     .then(() => {
-      // router.push('/');
+      router.push('/');
     })
   }
 

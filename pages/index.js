@@ -17,7 +17,7 @@ import { increment } from 'firebase/firestore';
 // import FriendList from '@/components/FriendList';
 
 // global variable for max item to query
-const LIMIT = 1;
+const LIMIT = 5;
 
 // get request for all users' items with SSR
 export async function getServerSideProps(context) {
@@ -105,10 +105,7 @@ export default function HomePage({ allItems, allFriends }) {
   const postItem = async (itemData) => {
     const itemRef = getItemRef(itemData.title);
     const newItemData = {
-      user: {
-        name: user.displayName,
-        username: username,
-      },
+      username,
       title: itemData.title,
       image: imageURL, 
       caption: itemData.caption,
