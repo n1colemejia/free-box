@@ -1,3 +1,4 @@
+import NavBar from '@/components/NavBar';
 import UserProfile from '@/components/UserProfile';
 import ItemFeed from '@/components/ItemFeed';
 
@@ -83,6 +84,7 @@ export default function ProfilePage({ user, userItems }) {
       .doc(uid)
       .collection('items')
       .doc(itemTitle);
+
     return itemRef;
   };
   
@@ -111,10 +113,7 @@ export default function ProfilePage({ user, userItems }) {
   const postItem = async (itemData) => {
     const itemRef = getItemRef(itemData.title);
     const newItemData = {
-      user: {
-        name: user.displayName,
-        username: username,
-      },
+      username,
       title: itemData.title,
       image: imageURL, 
       caption: itemData.caption,
@@ -192,23 +191,23 @@ export default function ProfilePage({ user, userItems }) {
   };
 
   // add dibs to item
-  const addDibs = async (itemTitle, dibsRef) => {
-    const batch = firestore.batch();
-    const uid = auth.currentUser.uid;
-    const itemRef = getItemRef(itemTitle);
-    batch.update(itemRef, { dibsCount: increment(1) });
-    batch.set(dibsRef, { uid });
-    await batch.commit();
-  };
+  // const addDibs = async (itemTitle, dibsRef) => {
+  //   const batch = firestore.batch();
+  //   const uid = auth.currentUser.uid;
+  //   const itemRef = getItemRef(itemTitle);
+  //   batch.update(itemRef, { dibsCount: increment(1) });
+  //   batch.set(dibsRef, { uid });
+  //   await batch.commit();
+  // };
 
   // remove dibs from item
-  const removeDibs = async (itemTitle, dibsRef) => {
-    const batch = firestore.batch();
-    const itemRef = getItemRef(itemTitle);
-    batch.update(itemRef, { dibsCount: increment(-1) });
-    batch.delete(dibsRef);
-    await batch.commit();
-  };
+  // const removeDibs = async (itemTitle, dibsRef) => {
+  //   const batch = firestore.batch();
+  //   const itemRef = getItemRef(itemTitle);
+  //   batch.update(itemRef, { dibsCount: increment(-1) });
+  //   batch.delete(dibsRef);
+  //   await batch.commit();
+  // };
 
   // add friend to user
   const addFriend = async (friendRef) => {
@@ -245,8 +244,8 @@ export default function ProfilePage({ user, userItems }) {
         handleOpenEditItem={handleOpenEditItem}
         editItemCallback={editItem}
         deleteItemCallback={deleteItem}
-        addDibsCallback={addDibs}
-        removeDibsCallback={removeDibs}
+        // addDibsCallback={addDibs}
+        // removeDibsCallback={removeDibs}
       />
     </main>
   );

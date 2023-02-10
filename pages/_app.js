@@ -7,10 +7,10 @@ export default function App({ Component, pageProps }) {
   const userData = useUserData();
 
   return (
-    <UserContext.Provider value={userData}>
-      <NextUIProvider>
-        <Component {...pageProps} />
-      </NextUIProvider>
-    </UserContext.Provider>
+      <UserContext.Provider value={userData}>
+        <NextUIProvider>
+          <Component {...pageProps} />
+        </NextUIProvider>
+      </UserContext.Provider>
   );
 }

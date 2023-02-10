@@ -18,7 +18,7 @@ export default function Item({
   return (
     <Card>
       <Link href={`/${item.username}`}>
-      <Text h2>@{item.username}</Text>
+        <Text h2>@{item.username}</Text>
       </Link>
       <Text h3>{item.title}</Text>
       <Image 
@@ -36,12 +36,13 @@ export default function Item({
             itemTitle={item.title}
             deleteItemCallback={deleteItemCallback}
             />
-            <DibsButton 
+            {/* <DibsButton
+              user={item.username}
               itemTitle={item.title}
               addDibsCallback={addDibsCallback}
               removeDibsCallback={removeDibsCallback}
-            />
-          </AuthCheck>
+            /> */}
+        </AuthCheck>
     </Card>
   );
 }

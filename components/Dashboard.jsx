@@ -1,4 +1,4 @@
-import { Container, Row, Card, Text } from '@nextui-org/react';
+import { Container, Col, Card, Text } from '@nextui-org/react';
 
 export default function Dashboard() {
   const updateOne = "Brianna, Natalie and 3 others added new item to their free box";
@@ -17,10 +17,10 @@ export default function Dashboard() {
     <Container>
       <Card>
         <Card.Body>
-          <Row justify='center' align='center'>
-            <Text h2>Hello User</Text>
+          <Col justify='center' align='center'>
+            <Text h2>Hello Nicole</Text>
             {notifications}
-          </Row>
+          </Col>
         </Card.Body>
       </Card>
     </Container>

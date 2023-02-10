@@ -1,7 +1,8 @@
 import Item from '@/components/Item';
 import { Container, Button, Text } from "@nextui-org/react";
 
-export default function ItemFeed({ items, 
+export default function ItemFeed({ 
+  items, 
   loading, 
   itemsEnd, 
   getMoreItemsCallback, 

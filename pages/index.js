@@ -41,7 +41,7 @@ export async function getServerSideProps(context) {
   // });
 
   return {
-    props: { allItems, } //allFriends }, // passed to HomePage as props
+    props: { allItems, } // passed to HomePage as props
   };
 }
 
