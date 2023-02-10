@@ -3,6 +3,7 @@ import AdminButtons from './AdminButtons';
 import DibsButton from './DibsButton';
 import { Card, Text } from '@nextui-org/react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Item({ 
   item, 
@@ -16,8 +17,9 @@ export default function Item({
 
   return (
     <Card>
-      <Text h2>{item.user.name}</Text>
-      <Text h2>@{item.user.username}</Text>
+      <Link href={`/${item.username}`}>
+      <Text h2>@{item.username}</Text>
+      </Link>
       <Text h3>{item.title}</Text>
       <Image 
         src={item.image}
@@ -26,14 +28,14 @@ export default function Item({
         height={300}
         />
         <Text>{item.caption}</Text>
-        <AdminButtons 
-          openEditItem={openEditItem}
-          handleOpenEditItem={handleOpenEditItem}
-          editItemCallback={editItemCallback}
-          itemTitle={item.title}
-          deleteItemCallback={deleteItemCallback}
-          />
-          <AuthCheck>
+        <AuthCheck>
+          <AdminButtons 
+            openEditItem={openEditItem}
+            handleOpenEditItem={handleOpenEditItem}
+            editItemCallback={editItemCallback}
+            itemTitle={item.title}
+            deleteItemCallback={deleteItemCallback}
+            />
             <DibsButton 
               itemTitle={item.title}
               addDibsCallback={addDibsCallback}
