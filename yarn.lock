@@ -2764,6 +2764,11 @@ dot-prop@^5.2.0:
   dependencies:
     is-obj "^2.0.0"
 
+drag-react@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/drag-react/-/drag-react-1.1.1.tgz#3e5c2af3c12024e00862a5490b419f816b40d7b3"
+  integrity sha512-Pvc8c+7KS3Hrw9jEwzzZgkIv7DyompHYyus3jVDbFdZ7UJTVC22HgzFJ4Bms+5jwE7SKuoLT4/cjayq4e8HE2A==
+
 duplexer2@~0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer2/-/duplexer2-0.1.4.tgz#8b12dab878c0d69e3e7891051662a32fc6bddcc1"

@@ -1,8 +1,19 @@
+import styles from '../styles/Login.module.css';
 import 'reactjs-popup/dist/index.css';
 
+import clippings from '../public/images/clippings.jpeg';
+import chair from '../public/images/chair.jpeg';
+import candles from '../public/images/candles.jpeg';
+import books from '../public/images/books.jpeg';
+import boots from '../public/images/boots.jpeg';
+import flowers from '../public/images/flowers.jpeg';
+import purse from '../public/images/purse.jpeg';
+
 import NavBar from '@/components/NavBar';
+import Image from 'next/image';
 import { Input, Button, Text } from '@nextui-org/react';
 import Popup from 'reactjs-popup';
+import { Draggable } from 'drag-react';
 
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -147,6 +158,20 @@ export default function LoginPage(props) {
     })
   };
 
+  const content = (
+    <div className={styles.landing__imgDiv}>
+            {/* <h2>Upcycle with friends!</h2> */}
+            <Draggable style={{position: 'absolute', left: '3rem', top: '7.5rem', zIndex: 2}}><Image className={styles.purse} src={purse} alt='boots'/></Draggable>
+            <Draggable style={{position: 'absolute', left: '67rem', top: '20rem', zIndex: 2}}><Image className={styles.books} src={books} alt='boots'/></Draggable>
+            <Draggable style={{position: 'absolute', left: '20rem', top: '6rem', zIndex: 2}}><Image className={styles.flowers} src={flowers} alt='books'/></Draggable>
+            <Draggable style={{position: 'absolute', left: '50rem', top: '4rem', zIndex: 1}}><Image className={styles.boots} src={boots} alt='boots'/></Draggable>
+            <Draggable style={{position: 'absolute', left: '38rem', top: '15rem', zIndex: 0}}><Image priority={true} className={styles.clippings} src={clippings} alt='lemons'/></Draggable>
+            {/* <Draggable style={{position: 'absolute', left: '65rem', top: '5rem', zIndex: 0}}><Image className={styles.chair} src={chair} alt='record'/></Draggable> */}
+            {/* <Draggable style={{position: 'absolute', left: '44rem', top: '15rem', zIndex: 1}}><Image className={styles.candles} src={candles} alt='glasses'/></Draggable> */}
+            
+    </div>
+);
+
   return (
     <main>
       <NavBar 
@@ -188,6 +213,9 @@ export default function LoginPage(props) {
             <Button type='submit' disabled={!isValid}>I want it!</Button>
           </form>
       </Popup>
+      <div>
+        {content}
+      </div>
     </main>
   );
 }
