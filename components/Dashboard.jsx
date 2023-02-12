@@ -1,4 +1,6 @@
-import { Container, Col, Card, Text } from '@nextui-org/react';
+import styles from '../styles/Dashboard.module.css';
+
+import Link from 'next/link';
 
 export default function Dashboard() {
   const updateOne = "Brianna, Natalie and 3 others added new item to their free box";
@@ -6,23 +8,23 @@ export default function Dashboard() {
   const updateThree = "Sahana added you as a friend";
   
   const notifications = (
-    <div>
-      <Text h3>{updateOne}</Text>
-      <Text h3>{updateTwo}</Text>
-      <Text h3>{updateThree}</Text>
+    <div className={styles.updates}>
+      <h2 className={styles.updateOne}>
+        <Link className={styles.link} href='/captainofvintage'>Uche</Link>, <Link className={styles.link} href='/jackharlows_gf'>Aisha</Link> and <Link className={styles.link} href='/'>3 others</Link> added new item to their free box.
+      </h2>     
+      <h2 className={styles.updateTwo}>
+        2 friends claimed dibs on items in <Link className={styles.link} href='/nicolemejia'>your free box</Link>.
+      </h2>    
+      <h2 className={styles.updateThree}>
+        <Link className={styles.link} href='/nashwa'>Nashwa</Link> added you as a friend.
+      </h2>   
     </div>
   );
 
   return (
-    <Container>
-      <Card>
-        <Card.Body>
-          <Col justify='center' align='center'>
-            <Text h2>Hello Nicole</Text>
+    <section className={styles.dash}>
+            <h1 className={styles.greeting}>Hello Nicole 🖤</h1>
             {notifications}
-          </Col>
-        </Card.Body>
-      </Card>
-    </Container>
+    </section>
   );
 }
