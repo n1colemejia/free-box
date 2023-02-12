@@ -19,10 +19,6 @@ export default function Item({
 
   return (
     <div className={styles.item}>
-      <h3 className={styles.title}>{item.title}</h3>
-      <Link className={styles.usernameLink} href={`/${item.username}`}>
-        <h4 className={styles.username}>@{item.username}</h4>
-      </Link>
       <div className={styles.imageDiv}>
         <Image 
           className={styles.image}
@@ -32,7 +28,13 @@ export default function Item({
           height={300}
           />
       </div>
-        <h4 className={styles.caption}>{item.caption}</h4>
+      <div className={styles.infoDiv}>
+      <h3 className={styles.title}>{item.title}</h3>
+        {item.caption ? <h4 className={styles.caption}>{item.caption}</h4> : <h4 className={styles.noCap}>nothing to see here</h4>}
+      <Link className={styles.usernameLink} href={`/${item.username}`}>
+        <h4 className={styles.username}>@{item.username}</h4>
+      </Link>
+      </div>
         <AuthCheck>
           <div className={styles.buttons}>
             <AdminButtons 

@@ -1,56 +1,29 @@
-/* .item {
-    background-color: #CF997C;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    padding: 1rem;
-} */
-
 .item {
-    width: 30vw;
-    height: min-content;
-    background-color: #CF997C;
+    width: 25vw;
+    height: auto;
     display: grid;
     grid-template-columns: .12fr 7.5fr .12fr;
-    grid-template-rows: 5fr 1fr 2fr 1fr 1fr;
+    grid-template-rows: 2fr 1fr;
     z-index: 1;
-    /* padding: .5rem; */
+    border: #53ac9b solid 2px;
+    border-radius: 1.5rem;
 }
-
-.item:hover {
-    background-color: #703F29;
-}
-
-/* .title, .usernameLink {
-    align-self: flex-start;
-    padding: .25rem;
-    line-height: .5rem;
-} */
 
 .title {
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
     font-size: 2.5rem;
-    /* padding-top: .5rem; */
-    /* padding-left: 1.5rem; */
-    /* position: absolute; */
-    color: #DAC8AF;
-    text-shadow: #703F29;
-}
-
-.usernameLink {
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
-    /* padding-top: .25rem; */
-    /* padding-left: 1.5rem; */
-    /* position: absolute; */
-    color: #DAC8AF;
+    padding-top: .5rem;
 }
 
 .username {
-    font-size: 1rem;
+    font-size: .75rem;
+    line-height: .5rem;
+    color: black;
+    align-self: center;
+}
+
+.usernameLink {
+    align-self: center;
+    padding-top: 4.5rem;
 }
 
 .imageDiv {
@@ -61,12 +34,6 @@
     align-items: center;
     z-index: -1;
 }
-
-/* .image {
-    width: 20rem;
-    height: 25rem;
-    object-fit: cover;
-} */
 
 .imageDiv {
     position: relative;
@@ -84,17 +51,40 @@
     height: 100%;
     object-fit: cover;
     object-position: 50% 50%;
-    /* padding: .5rem; */
+    padding-top: .3rem;
+    border-radius: 1.5rem;
 }
 
 .caption {
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
     font-size: 1rem;
+}
+
+.noCap {
+    visibility: hidden;
 }
 
 .buttons {
     grid-column: 2 / 3;
-    grid-row: 5 / 6;
-    padding-bottom: .4rem;
+    grid-row: 1 / 2;
+    /* padding-bottom: .4rem; */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    visibility: hidden;
+}
+
+.item:hover .buttons {
+    visibility: visible;
+}
+
+.infoDiv {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    line-height: 1.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-left: .5rem;
+    padding-bottom: .5rem;
 }

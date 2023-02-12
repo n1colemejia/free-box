@@ -3,10 +3,10 @@
 }
 
 .button {
-    background-color: #CF997C;
-    color: #703F29;
+    background-color: #53AC9B;
+    color: #FEFDFA;
     border-radius: 1rem;
-    border-color: #703F29;
+    border-color: #FEFDFA;
 }
 
 .button:hover {
