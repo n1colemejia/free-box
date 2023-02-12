@@ -1,0 +1,17 @@
+.main {
+    
+}
+
+.button {
+    background-color: #CF997C;
+    color: #703F29;
+    border-radius: 1rem;
+    border-color: #703F29;
+}
+
+.button:hover {
+    background-color: #703F29;
+    color: #CF997C;
+    border-radius: 1rem;
+    border-color: #703F29;
+}

@@ -1,5 +1,7 @@
+import styles from '../styles/ItemFeed.module.css';
+
 import Item from '@/components/Item';
-import { Container, Button, Text } from "@nextui-org/react";
+import { Button, Text } from "@nextui-org/react";
 
 export default function ItemFeed({ 
   items, 
@@ -30,10 +32,12 @@ export default function ItemFeed({
     ) : null;
   
   return (
-    <Container>
-      {itemsFeed}
+    <section>
+      <div className={styles.feed}>
+        {itemsFeed}
+      </div>
       {home && !loading && !itemsEnd && <Button onPress={getMoreItemsCallback}>Load More Stuff</Button>}
       {itemsEnd && <Text>I regret to inform you...there is no more stuff to load.</Text>}
-    </Container>
-  )
+    </section>
+  );
 }

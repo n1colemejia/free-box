@@ -1,0 +1,100 @@
+/* .item {
+    background-color: #CF997C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 1rem;
+} */
+
+.item {
+    width: 30vw;
+    height: min-content;
+    background-color: #CF997C;
+    display: grid;
+    grid-template-columns: .12fr 7.5fr .12fr;
+    grid-template-rows: 5fr 1fr 2fr 1fr 1fr;
+    z-index: 1;
+    /* padding: .5rem; */
+}
+
+.item:hover {
+    background-color: #703F29;
+}
+
+/* .title, .usernameLink {
+    align-self: flex-start;
+    padding: .25rem;
+    line-height: .5rem;
+} */
+
+.title {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    font-size: 2.5rem;
+    /* padding-top: .5rem; */
+    /* padding-left: 1.5rem; */
+    /* position: absolute; */
+    color: #DAC8AF;
+    text-shadow: #703F29;
+}
+
+.usernameLink {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    /* padding-top: .25rem; */
+    /* padding-left: 1.5rem; */
+    /* position: absolute; */
+    color: #DAC8AF;
+}
+
+.username {
+    font-size: 1rem;
+}
+
+.imageDiv {
+    grid-column: 2 / 3;
+    grid-row-start: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+}
+
+/* .image {
+    width: 20rem;
+    height: 25rem;
+    object-fit: cover;
+} */
+
+.imageDiv {
+    position: relative;
+}
+
+.imageDiv::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+.imageDiv img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    /* padding: .5rem; */
+}
+
+.caption {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    font-size: 1rem;
+}
+
+.buttons {
+    grid-column: 2 / 3;
+    grid-row: 5 / 6;
+    padding-bottom: .4rem;
+}

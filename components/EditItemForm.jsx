@@ -1,3 +1,4 @@
+import styles from '../styles/EditItemForm.module.css';
 import 'reactjs-popup/dist/index.css';
 
 // import Image from 'next/image';
@@ -26,8 +27,8 @@ export default function EditItemForm({ openEditItem, handleOpenEditItem, editIte
   };
 
   return (
-    <div>
-      <Button onPress={handleOpenEditItem}>Edit Item</Button>
+    <div className={styles.main}>
+      <button className={styles.button} onClick={handleOpenEditItem}>Edit</button>
       <Popup 
         open={openEditItem}
         closeOnDocumentClick onClose={() => handleOpenEditItem()}

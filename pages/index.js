@@ -202,7 +202,7 @@ export default function HomePage({ allItems, allFriends }) {
   };
 
   return (
-    <main>
+    <main className={styles.main}>
       <NavBar 
         handleLogOut={handleLogOut}
         openPostItem={openPostItem}
