@@ -1,0 +1,22 @@
+.nav {
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+}
+
+.navDiv {
+    height: auto;
+    display: flex;
+    align-items: center;
+    gap: 13rem;
+}
+
+.title {
+    color: black;
+}
+
+.centerDiv {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}

@@ -1,15 +1,16 @@
+import styles from '../styles/SearchBar.module.css';
 import { Input, Button } from '@nextui-org/react';
 
 export default function SearchBar() {
   return (
-    <>
-      <Input
-        clearable
+    <div className={styles.search}>
+      <input
+        className={styles.input}
         type='search'
         name='search'
         placeholder='Search'
       />
-      <Button>Search</Button>
-    </>
+      <button className={styles.button}>Search</button>
+    </div>
   );
 }

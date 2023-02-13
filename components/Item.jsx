@@ -30,7 +30,7 @@ export default function Item({
       </div>
       <div className={styles.infoDiv}>
       <h3 className={styles.title}>{item.title}</h3>
-        {item.caption ? <h4 className={styles.caption}>{item.caption}</h4> : <h4 className={styles.noCap}>nothing to see here</h4>}
+        {item.caption ? <h4 className={styles.caption}>{item.caption}</h4> : <h4 className={styles.noCap}>nothing to see here nothing to see here.</h4>}
       <Link className={styles.usernameLink} href={`/${item.username}`}>
         <h4 className={styles.username}>@{item.username}</h4>
       </Link>

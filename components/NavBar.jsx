@@ -1,7 +1,9 @@
+import styles from '../styles/NavBar.module.css';
+
 import PostItemForm from '@/components/PostItemForm';
 import SearchBar from '@/components/SearchBar';
 import SideMenu from '@/components/SideMenu';
-import { Navbar, Text, Button } from '@nextui-org/react';
+import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 
 import { useContext } from 'react';
@@ -13,54 +15,32 @@ export default function NavBar({ handleLogInWithGoogle, handleLogOut, openPostIt
   const { user, username } = useContext(UserContext);
 
   return user ? ( 
-    <Navbar shouldHideOnScroll variant='sticky'>
-      <Navbar.Brand>
-        <Text h1>
-          <Link href='/'>FREE BOX</Link>
-        </Text>
-      </Navbar.Brand>
-      
-      <Navbar.Content>
-
-        <Navbar.Item>
+    <nav className={styles.nav}>
+      <div className={styles.navDiv}>
+        <Link href='/' className={styles.title}>
+          <h1>FREE BOX</h1>
+        </Link>
+        <div className={styles.centerDiv}>
           <PostItemForm 
             openPostItem={openPostItem}
             handlePostItem={handlePostItem}
             postItemCallback={postItemCallback}
             uploadImageCallback={uploadImageCallback}
             handleFileChange={handleFileChange}
-            />
-        </Navbar.Item>
-
-          <Navbar.Item>
-            <SearchBar />
-          </Navbar.Item>
-
-        <Navbar.Item>
-          <SideMenu 
-            username={username}
-            handleLogOut={handleLogOut} />
-        </Navbar.Item>
-
-      </Navbar.Content>
-    </Navbar>
+          />
+          <SearchBar />
+        </div>
+        <SideMenu 
+          username={username}
+          handleLogOut={handleLogOut} />
+      </div>
+    </nav>
   ) : (
-    <Navbar shouldHideOnScroll variant='sticky'>
-
-      <Navbar.Brand>
-        <Text h1>
+    <nav>
+        <h1>
           <Link href='/login'>FREE BOX</Link>
-        </Text>
-      </Navbar.Brand>
-
-      <Navbar.Content>
-
-        <Navbar.Item>
+        </h1>
           <Button onPress={handleLogInWithGoogle}>Log In</Button>
-        </Navbar.Item>
-
-      </Navbar.Content>
-
-    </Navbar>
+    </nav>
   );
 }

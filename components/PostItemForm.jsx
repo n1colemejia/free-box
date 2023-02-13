@@ -1,4 +1,6 @@
+import styles from '../styles/PostItemForm.module.css';
 import 'reactjs-popup/dist/index.css';
+
 import { Button, Input } from '@nextui-org/react';
 import Popup from 'reactjs-popup';
 
@@ -26,7 +28,7 @@ export default function PostItemForm({ openPostItem, handlePostItem, postItemCal
 
   return (
     <div>
-      <Button onPress={handlePostItem}>Post Item</Button>
+      <button className={styles.button} onClick={handlePostItem}>Post Item</button>
       <Popup 
         open={openPostItem}
         closeOnDocumentClick onClose={() => handlePostItem()}
@@ -52,7 +54,7 @@ export default function PostItemForm({ openPostItem, handlePostItem, postItemCal
               value={itemData.caption}
               onChange={handleChange} 
               />
-            <Button type='submit'>Post New Item</Button>
+            <button className={styles.button} type='submit'>Post New Item</button>
         </form>
       </Popup>
     </div>
