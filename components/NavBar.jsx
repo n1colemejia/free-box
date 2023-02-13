@@ -3,14 +3,20 @@ import styles from '../styles/NavBar.module.css';
 import PostItemForm from '@/components/PostItemForm';
 import SearchBar from '@/components/SearchBar';
 import SideMenu from '@/components/SideMenu';
-import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 
 import { useContext } from 'react';
-
 import { UserContext } from '@/lib/context';
 
-export default function NavBar({ handleLogInWithGoogle, handleLogOut, openPostItem, handlePostItem, postItemCallback, uploadImageCallback, handleFileChange }) {
+export default function NavBar({ 
+  handleLogInWithGoogle,
+  handleLogOut, 
+  openPostItem, 
+  handlePostItem,
+  postItemCallback,
+  uploadImageCallback,
+  handleFileChange }) {
+
   // context 
   const { user, username } = useContext(UserContext);
 
@@ -32,7 +38,8 @@ export default function NavBar({ handleLogInWithGoogle, handleLogOut, openPostIt
         </div>
         <SideMenu 
           username={username}
-          handleLogOut={handleLogOut} />
+          handleLogOut={handleLogOut} 
+        />
       </div>
     </nav>
   ) : (
@@ -40,7 +47,7 @@ export default function NavBar({ handleLogInWithGoogle, handleLogOut, openPostIt
         <h1>
           <Link href='/login'>FREE BOX</Link>
         </h1>
-          <Button onPress={handleLogInWithGoogle}>Log In</Button>
+          <button onClick={handleLogInWithGoogle}>Log In</button>
     </nav>
   );
 }
