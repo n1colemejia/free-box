@@ -2,23 +2,26 @@ import styles from '../styles/AdminButtons.module.css';
 
 import AuthCheck from './AuthCheck';
 import EditItemForm from './EditItemForm';
-// import { Button } from '@nextui-org/react';
+import { deleteItem } from '@/lib/item';
+import DibsButton from './DibsButton';
+import { useContext } from 'react';
+import { UserContext } from '@/lib/context';
 
-export default function AdminButtons({ openEditItem, handleOpenEditItem, editItemCallback, itemTitle, deleteItemCallback }) {
+export default function AdminButtons({ item, openEditItem, handleOpenEditItem }) {
+  const { username } = useContext(UserContext);
+  let admin = false;
+  if (username === item.username) {
+    admin = true;
+  };
 
-
-  
-  return (
+  return admin ? (
     <div className={styles.main} >
-      <AuthCheck>
-          <EditItemForm 
-            openEditItem={openEditItem}
-            handleOpenEditItem={handleOpenEditItem}
-            editItemCallback={editItemCallback}
-            itemTitle={itemTitle}
-          />
-        <button className={styles.button} onClick={() => deleteItemCallback(itemTitle)}>Delete</button>
-      </AuthCheck>
+          <EditItemForm itemTitle={item.title} openEditItem={openEditItem} handleOpenEditItem={handleOpenEditItem} />
+          <button className={styles.button} onClick={() => deleteItem(item.title)}>Delete</button>
+    </div>
+  ) : (
+    <div>
+      <DibsButton />
     </div>
   );
-}
+};
