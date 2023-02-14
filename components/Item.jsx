@@ -2,8 +2,6 @@ import styles from '../styles/Item.module.css';
 
 import AuthCheck from './AuthCheck';
 import AdminButtons from './AdminButtons';
-import DibsButton from './DibsButton';
-import { Text } from '@nextui-org/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -11,10 +9,6 @@ export default function Item({
   item, 
   openEditItem, 
   handleOpenEditItem, 
-  editItemCallback, 
-  deleteItemCallback,
-  addDibsCallback,
-  removeDibsCallback
 }) {
 
   return (
@@ -35,23 +29,13 @@ export default function Item({
         <h4 className={styles.username}>@{item.username}</h4>
       </Link>
       </div>
-        <AuthCheck>
           <div className={styles.buttons}>
             <AdminButtons 
               openEditItem={openEditItem}
               handleOpenEditItem={handleOpenEditItem}
-              editItemCallback={editItemCallback}
-              itemTitle={item.title}
-              deleteItemCallback={deleteItemCallback}
-              />
-              {/* <DibsButton
-                user={item.username}
-                itemTitle={item.title}
-                addDibsCallback={addDibsCallback}
-                removeDibsCallback={removeDibsCallback}
-              /> */}
+              item={item}
+            />
           </div>
-        </AuthCheck>
     </div>
   );
 }

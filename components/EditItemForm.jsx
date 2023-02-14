@@ -5,25 +5,27 @@ import 'reactjs-popup/dist/index.css';
 import { Button, Input } from '@nextui-org/react';
 import Popup from 'reactjs-popup';
 
+import { editItem } from '@/lib/item';
+
 import { useState } from 'react';
 
-export default function EditItemForm({ openEditItem, handleOpenEditItem, editItemCallback, itemTitle }) {
+export default function EditItemForm({ openEditItem, handleOpenEditItem, itemTitle }) {
   const [itemData, setItemData] = useState({
-    title: itemTitle,
+    title: '',
     caption: '', 
   });
 
   const submitItem = (event) => {
     event.preventDefault();
-    editItemCallback(itemData);
+    editItem(itemData);
     setItemData({
         title: itemTitle,
         caption: '', 
       });
-  }
+  };
 
   const handleChange = (event) => {
-    setItemData({...itemData, [event.target.name]: event.target.value});
+    setItemData({...itemData, title: itemTitle, [event.target.name]: event.target.value});
   };
 
   return (
@@ -34,13 +36,6 @@ export default function EditItemForm({ openEditItem, handleOpenEditItem, editIte
         closeOnDocumentClick onClose={() => handleOpenEditItem()}
         >
         <form onSubmit={submitItem}>
-            {/* <Input 
-              underlined 
-              labelPlaceholder="Title"
-              name='title'
-              value={itemData.title}
-              onChange={handleChange}
-              /> */}
             {/* <Image 
               src={item.image}
               alt={`${item.title}`}

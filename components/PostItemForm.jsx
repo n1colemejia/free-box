@@ -1,7 +1,7 @@
 import styles from '../styles/PostItemForm.module.css';
 import 'reactjs-popup/dist/index.css';
 
-import { Button, Input } from '@nextui-org/react';
+import { Input } from '@nextui-org/react';
 import Popup from 'reactjs-popup';
 
 import { useState } from 'react';
@@ -45,7 +45,7 @@ export default function PostItemForm({ openPostItem, handlePostItem, postItemCal
               type='file'
               onChange={(event) => handleFileChange(event.target.files[0])}
             />
-            <Button onPress={uploadImageCallback}>Upload Image</Button>
+            <button className={styles.button} onClick={uploadImageCallback}>Upload Image</button>
             <Input 
               underlined 
               clearable 

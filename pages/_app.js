@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 import { UserContext } from '@/lib/context';
 import { useUserData } from '@/lib/hooks';
 import { NextUIProvider } from '@nextui-org/react';
-
 import { auth, firestore, storage, googleAuthProvider, serverTimestamp } from '@/lib/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
@@ -29,6 +28,7 @@ export default function App({ Component, pageProps }) {
   // username
   const username = userData.username;
 
+  // NAV BAR LOGIC //
   // handle log in 
   const handleLogInWithGoogle = async () => {
     await auth.signInWithPopup(googleAuthProvider)
@@ -37,8 +37,8 @@ export default function App({ Component, pageProps }) {
     })
     .then(() => {
       router.push('/');
-    })
-  }
+    });
+  };
 
   // handle log out 
   const handleLogOut = () => {
@@ -71,7 +71,7 @@ export default function App({ Component, pageProps }) {
     };
     await itemRef.set(newItemData);
     router.reload();
-  }
+  };
 
   // handle open post item pop up 
   const handlePostItem = () => {
