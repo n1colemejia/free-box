@@ -1,0 +1,13 @@
+.button {
+    background-color: #FEFDFA;
+    color: black;
+    border-radius: 1rem;
+    border-color: black;
+}
+
+.button:hover {
+    background-color: black;
+    color: #FEFDFA;
+    border-radius: 1rem;
+    border-color: #FEFDFA;
+}

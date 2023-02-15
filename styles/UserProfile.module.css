@@ -1,0 +1,63 @@
+.section {
+    width: 75vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: black solid 1px; */
+    border-radius: 1.5rem;
+    padding-left: 10rem;
+    padding-right: 10rem;
+}
+
+.profile {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 1.5rem;
+    padding-left: 5rem;
+}
+
+.imageDiv {
+    grid-column: 1 / 2;
+    grid-row: 1 / span 4;
+    border-radius: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 2rem;
+}
+
+.image {
+    border-radius: 10rem;
+    object-fit: cover;
+    object-position: 50% 50%;
+}
+
+.nameAndButton {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.name {
+    font-size: 3rem;
+}
+
+.username {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    line-height: 0;
+    font-size: 1.5rem;
+    padding-top: 6rem;
+}
+
+.bio {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    line-height: 0;
+    font-size: 1rem;
+    padding-top: 6.5rem;
+}

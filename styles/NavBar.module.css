@@ -1,3 +1,15 @@
+.loginNav {
+    background-color: #FEFDFA;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+    gap: .5rem;
+}
+
 .nav {
     background-color: #FEFDFA;
     display: flex;
@@ -20,7 +32,7 @@
 
 .div {
     display: flex;
-    gap: .5rem;
+    gap: .1rem;
     align-content: flex-end;
 }
 

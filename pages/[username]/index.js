@@ -1,3 +1,4 @@
+import styles from '../../styles/ProfilePage.module.css';
 import UserProfile from '@/components/UserProfile';
 import ItemFeed from '@/components/ItemFeed';
 
@@ -91,7 +92,7 @@ export default function ProfilePage({ user, userItems }) {
   };
 
   return (
-    <main>
+    <main className={styles.main} >
       <UserProfile 
         user={user}
         addFriendCallback={addFriend}

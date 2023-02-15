@@ -5,9 +5,9 @@
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
-    padding-left: 6rem;
-    padding-right: 6rem;
-    gap: 1rem;
+    padding-left: 10rem;
+    padding-right: 10rem;
+    gap: 2rem;
 }
 
 .feedHeading {

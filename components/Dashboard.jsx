@@ -23,7 +23,7 @@ export default function Dashboard() {
 
   return (
     <section className={styles.dash}>
-            <h1 className={styles.greeting}>Welcome to Free Box, Nicole</h1>
+            <h1 className={styles.greeting}>Good Afternoon, Nicole 🖤</h1>
             {notifications}
     </section>
   );

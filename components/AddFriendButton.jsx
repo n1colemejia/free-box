@@ -1,5 +1,6 @@
+import styles from '../styles/AddFriendButton.module.css';
+
 import { auth, firestore } from '@/lib/firebase';
-import { Button } from '@nextui-org/react';
 import { useDocument } from 'react-firebase-hooks/firestore';
 
 export default function AddFriendButton({ friend , addFriendCallback, removeFriendCallback }) {
@@ -9,8 +10,8 @@ export default function AddFriendButton({ friend , addFriendCallback, removeFrie
   const [friendDoc] = useDocument(friendRef);
 
   return friendDoc?.exists() ? (
-    <Button size='sm' onPress={() => removeFriendCallback(friendRef)}>Remove Friend</Button>
+    <button className={styles.button} onClick={() => removeFriendCallback(friendRef)}>Remove Friend</button>
     ) : (
-    <Button size='sm' onPress={() => addFriendCallback(friendRef)}>Add Friend</Button>
+    <button className={styles.button} onClick={() => addFriendCallback(friendRef)}>Add Friend</button>
     );
 }

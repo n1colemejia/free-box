@@ -4,7 +4,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
-    padding: 1rem;
+    padding: 1.5rem;
     border: black solid 1px;
     border-radius: 1.5rem;
 }
@@ -16,11 +16,11 @@
 }
 
 .updates {
-    line-height: 1.5rem;
+    line-height: 1.25rem;
 }
 
 .updateOne {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
 }
 
 .updateTwo {

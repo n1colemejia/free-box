@@ -14,6 +14,7 @@ import { v4 } from 'uuid';
 
 export default function App({ Component, pageProps }) {
   // state 
+  const [openPopup, setOpenPopup] = useState(false);
   const [openPostItem, setOpenPostItem] = useState(false);
   const [imageToUpload, setImageToUpload] = useState(null);
   const [imageList, setImageList] = useState([]);

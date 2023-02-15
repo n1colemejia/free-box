@@ -53,13 +53,17 @@ export default function NavBar({
         </div>
     </nav>
   ) : (
-    <nav>
-        <h1>
-          <Link href='/login'>
+    <nav className={styles.loginNav}>
+        <div className={styles.title}>
+          <Link href='/login' className={styles.logo}>
             <Image src={logo} width={100} height={100} alt='cube' />
           </Link>
-        </h1>
+          <h1>free box</h1>
+        </div>
+        <div className={styles.buttons}>
+          <button className={styles.button}>Sign Up</button>
           <button className={styles.button} onClick={handleLogInWithGoogle}>Log In</button>
+        </div>
     </nav>
   );
 }

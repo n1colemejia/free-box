@@ -174,9 +174,6 @@ export default function LoginPage(props) {
 
   return (
     <main>
-      <NavBar 
-        handleLogInWithGoogle={handleLogInWithGoogle}
-      />
       <Popup 
         open={openPopup}
         closeOnDocumentClick onClose={() => handlePopup()}
