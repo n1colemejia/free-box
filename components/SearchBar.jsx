@@ -1,6 +1,6 @@
 import styles from '../styles/SearchBar.module.css';
-import { Input, Button } from '@nextui-org/react';
-
+import Image from 'next/image';
+import search from '../public/images/search.png';
 export default function SearchBar() {
   return (
     <div className={styles.search}>
@@ -8,9 +8,10 @@ export default function SearchBar() {
         className={styles.input}
         type='search'
         name='search'
-        placeholder='Search'
+        placeholder=' Search'
       />
-      <button className={styles.button}>Search</button>
+      <Image className={styles.icon} src={search} width={25} alt='search button' />
     </div>
   );
 }
+

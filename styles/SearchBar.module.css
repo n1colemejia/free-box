@@ -1,18 +1,15 @@
 .search {
     display: flex;
     gap: .5rem
-
 }
 
 .input {
+    width: 14rem;
     border-radius: 1rem;
     background-color: #FEFDFA;
     border: black solid 1px;
 }
 
-.button {
-    border-radius: 1rem;
-    background-color: #FEFDFA;
-    border: black solid 1px;
+.icon {
     cursor: pointer;
 }

@@ -4,8 +4,8 @@
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
-    padding: 2rem;
-    border: black solid 1px;
+    padding: 1rem;
+    /* border: black solid 1px; */
     border-radius: 1.5rem;
 }
 

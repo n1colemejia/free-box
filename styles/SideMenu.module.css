@@ -1,0 +1,20 @@
+.div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.link {
+    align-self: flex-start;
+    color: black;
+}
+
+.button {
+    align-self: flex-end;
+    border-radius: 1rem;
+    background-color: #FEFDFA;
+    border: black solid 1px;
+    cursor: pointer;
+}
