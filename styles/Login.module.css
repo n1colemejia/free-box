@@ -1,34 +1,51 @@
+.div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .slogan {
+    align-self: center;
+} */
+
 .books {
-    width: 24vw;
+    width: 20vw;
     height: auto;
+    border-radius: 1.5rem;
 }
 
 .boots {
     width: 25vw;
     height: auto;
+    border-radius: 1.5rem;
 }
 
 .candles {
     width: 20vw;
     height: auto;
+    border-radius: 1.5rem;
 }
 
 .chair {
     width: 25vw;
     height: auto;
+    border-radius: 1.5rem;
 }
 
 .clippings {
     width: 15vw;
     height: auto;
+    border-radius: 1.5rem;
 }
 
 .flowers {
     width: 24vw;
     height: auto;
+    border-radius: 1.5rem;
 }
 
 .purse {
     width: 24vw;
     height: auto;
+    border-radius: 1.5rem;
 }

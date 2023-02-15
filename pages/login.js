@@ -159,16 +159,14 @@ export default function LoginPage(props) {
   };
 
   const content = (
-    <div className={styles.landing__imgDiv}>
-            {/* <h2>Upcycle with friends!</h2> */}
-            <Draggable style={{position: 'absolute', left: '3rem', top: '7.5rem', zIndex: 2}}><Image className={styles.purse} src={purse} alt='boots'/></Draggable>
-            <Draggable style={{position: 'absolute', left: '67rem', top: '20rem', zIndex: 2}}><Image className={styles.books} src={books} alt='boots'/></Draggable>
-            <Draggable style={{position: 'absolute', left: '20rem', top: '6rem', zIndex: 2}}><Image className={styles.flowers} src={flowers} alt='books'/></Draggable>
-            <Draggable style={{position: 'absolute', left: '50rem', top: '4rem', zIndex: 1}}><Image className={styles.boots} src={boots} alt='boots'/></Draggable>
-            <Draggable style={{position: 'absolute', left: '38rem', top: '15rem', zIndex: 0}}><Image priority={true} className={styles.clippings} src={clippings} alt='lemons'/></Draggable>
-            {/* <Draggable style={{position: 'absolute', left: '65rem', top: '5rem', zIndex: 0}}><Image className={styles.chair} src={chair} alt='record'/></Draggable> */}
-            {/* <Draggable style={{position: 'absolute', left: '44rem', top: '15rem', zIndex: 1}}><Image className={styles.candles} src={candles} alt='glasses'/></Draggable> */}
-            
+    <div className={styles.div}>
+            <h2 className={styles.slogan}>Upcycle with friends!</h2>
+            <Draggable style={{position: 'absolute', left: '23rem', top: '7.5rem', zIndex: 2}}><Image className={styles.boots} src={boots} alt='boots'/></Draggable>
+            <Draggable style={{position: 'absolute', left: '46rem', top: '24rem', zIndex: 2}}><Image className={styles.books} src={books} alt='boots'/></Draggable>
+            <Draggable style={{position: 'absolute', left: '40rem', top: '6rem', zIndex: 1}}><Image className={styles.flowers} src={flowers} alt='books'/></Draggable>            
+            {/* <Draggable style={{position: 'absolute', left: '38rem', top: '15rem', zIndex: 0}}><Image priority={true} className={styles.clippings} src={clippings} alt='lemons'/></Draggable> */}
+            <Draggable style={{position: 'absolute', left: '62rem', top: '9rem', zIndex: 0}}><Image className={styles.chair} src={chair} alt='chair'/></Draggable>
+            <Draggable style={{position: 'absolute', left: '4.5rem', top: '10rem', zIndex: 1}}><Image className={styles.candles} src={candles} alt='candles'/></Draggable>
     </div>
 );
 
