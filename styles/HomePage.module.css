@@ -9,3 +9,22 @@
     padding-right: 6rem;
     gap: 1rem;
 }
+
+.feedHeading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding-top: 1rem;
+}
+
+.heading {
+    transform: rotate(-2deg);
+    margin: 0;
+    padding: 0;
+}
+
+.arrow {
+    transform: rotate(93deg);
+}

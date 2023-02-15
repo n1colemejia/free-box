@@ -36,3 +36,14 @@
     border: black solid 1px;
     cursor: pointer;
 }
+
+.button:hover {
+    background-color: black;
+    color: #FEFDFA;
+    border-radius: 1rem;
+    border-color: #FEFDFA;
+}
+
+.link:hover {
+    color: #FEFDFA;
+}

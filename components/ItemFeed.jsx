@@ -22,12 +22,12 @@ export default function ItemFeed({
     ) : null;
   
   return (
-    <section>
+    <section className={styles.section}>
       <div className={styles.feed}>
         {itemsFeed}
       </div>
-      {!loading && !itemsEnd && <button onClick={getMoreItemsCallback}>Load More Stuff</button>}
-      {itemsEnd && <p>I regret to inform you...there is no more stuff to load.</p>}
+      {!loading && !itemsEnd && <button className={styles.button} onClick={getMoreItemsCallback}>Load More Stuff</button>}
+      {itemsEnd && <p className={styles.message}>I regret to inform you...there is no more stuff to load.</p>}
     </section>
   );
 };

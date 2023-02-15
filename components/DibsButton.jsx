@@ -1,3 +1,4 @@
+import styles from '../styles/DibsButton.module.css';
 import { UserContext } from '@/lib/context';
 import { firestore, getUserWithUsername } from '@/lib/firebase';
 import { addDibs, removeDibs } from '@/lib/item';
@@ -39,5 +40,5 @@ export default function DibsButton({ item }) {
 //     ) : (
 //     <button onClick={handleAdd}>I want dibs!</button>
 //     );
-  return <button>I want dibs!</button>
+  return <button className={styles.button}>I want dibs!</button>
 };

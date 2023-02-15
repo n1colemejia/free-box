@@ -1,7 +1,10 @@
 import styles from '@/styles/HomePage.module.css';
 
+import arrow from '../public/images/arrow.png';
+
 import Dashboard from '@/components/Dashboard';
 import ItemFeed from '@/components/ItemFeed';
+import Image from 'next/image';
 
 import { useState } from 'react';
 import { firestore, itemToJSON, fromMillis } from '@/lib/firebase';
@@ -61,6 +64,10 @@ export default function HomePage({ allItems }) {
   return (
     <main className={styles.main}>
       <Dashboard />
+      <div className={styles.feedHeading}>
+        <h3 className={styles.heading}>Dig through your friends stuff!</h3>
+        <Image className={styles.arrow} src={arrow} width={200} alt='arrow' />
+      </div>
       <ItemFeed 
         items={items}
         loading={loading}
