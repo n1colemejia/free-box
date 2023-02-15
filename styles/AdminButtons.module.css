@@ -3,15 +3,15 @@
 }
 
 .button {
-    background-color: #53AC9B;
-    color: #FEFDFA;
+    background-color: #FEFDFA;
+    color: black;
     border-radius: 1rem;
-    border-color: #FEFDFA;
+    border-color: black;
 }
 
 .button:hover {
-    background-color: #703F29;
-    color: #CF997C;
+    background-color: black;
+    color: #FEFDFA;
     border-radius: 1rem;
-    border-color: #703F29;
+    border-color: #FEFDFA;
 }
