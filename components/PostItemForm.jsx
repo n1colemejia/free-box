@@ -33,7 +33,7 @@ export default function PostItemForm({ openPostItem, handlePostItem, postItemCal
         open={openPostItem}
         closeOnDocumentClick onClose={() => handlePostItem()}
         >
-        <form onSubmit={submitNewItem}>
+        <form className={styles.form} onSubmit={submitNewItem}>
             <Input 
               underlined 
               labelPlaceholder="Title"

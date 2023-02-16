@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { firestore, itemToJSON, fromMillis } from '@/lib/firebase';
 
 // global variable for max item to query
-const LIMIT = 5;
+const LIMIT = 6;
 
 // get request for all users' items with SSR
 export async function getServerSideProps(context) {

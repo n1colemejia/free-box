@@ -3,6 +3,9 @@
     color: black;
     border-radius: 1rem;
     border-color: black;
+    cursor: pointer;
+    width: 8vw;
+    margin-top: 1rem;
 }
 
 .button:hover {
