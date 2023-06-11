@@ -1,6 +1,6 @@
 ## Welcome to Free Box
 Free box is a social-media-inspired upcycling wep app. 
-Scroll through your feed or friends' profiles to check out all the free stuff they posted, claim dibs on items, and decrease unnecessary consumer spending and waste.
+Scroll through the free stuff your friends posted, claim dibs on items, and decrease unnecessary spending and waste.
 
 ## Features
 - Authenticated log in
